@@ -22,5 +22,5 @@
  <img src="https://github.com/Burakyilmam/MasaustuUygulamaDemo/assets/61635780/afed1ee1-b425-4b89-a4ad-d273f54fcb28">
   <h4 align="center">Kullanıların silinmesi</h4>
  <img src="https://github.com/Burakyilmam/MasaustuUygulamaDemo/assets/61635780/f8090e0c-6694-4c8c-a246-8014adb81ee3">
- <h4 align="center">Güncelleme ve Silme işkemi sonrası listelenmesi</h4>
+ <h4 align="center">Güncelleme ve Silme işlemi sonrası listelenmesi</h4>
  <img src="https://github.com/Burakyilmam/MasaustuUygulamaDemo/assets/61635780/e2b87666-b1ea-478d-b5e8-eb188d316a60">
