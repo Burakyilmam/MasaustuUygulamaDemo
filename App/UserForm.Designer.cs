@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
+            SelectBox = new DataGridViewCheckBoxColumn();
+            Id = new DataGridViewTextBoxColumn();
+            Username = new DataGridViewTextBoxColumn();
+            Password = new DataGridViewTextBoxColumn();
+            BirthDate = new DataGridViewTextBoxColumn();
             BtnList = new Button();
             AddBtn = new Button();
             DeleteBtn = new Button();
@@ -45,22 +50,55 @@
             label1 = new Label();
             dateTimePicker3 = new DateTimePicker();
             dateTimePicker4 = new DateTimePicker();
-            Id = new DataGridViewTextBoxColumn();
-            Username = new DataGridViewTextBoxColumn();
-            Password = new DataGridViewTextBoxColumn();
-            BirthDate = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, Username, Password, BirthDate });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { SelectBox, Id, Username, Password, BirthDate });
             dataGridView1.Location = new Point(56, 44);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(737, 350);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // SelectBox
+            // 
+            SelectBox.HeaderText = "";
+            SelectBox.MinimumWidth = 6;
+            SelectBox.Name = "SelectBox";
+            SelectBox.Width = 125;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "ID";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.Width = 125;
+            // 
+            // Username
+            // 
+            Username.HeaderText = "Kullanıcı Adı";
+            Username.MinimumWidth = 6;
+            Username.Name = "Username";
+            Username.Width = 125;
+            // 
+            // Password
+            // 
+            Password.HeaderText = "Parola";
+            Password.MinimumWidth = 6;
+            Password.Name = "Password";
+            Password.Width = 125;
+            // 
+            // BirthDate
+            // 
+            BirthDate.HeaderText = "Doğum Günü";
+            BirthDate.MinimumWidth = 6;
+            BirthDate.Name = "BirthDate";
+            BirthDate.Width = 125;
             // 
             // BtnList
             // 
@@ -178,7 +216,6 @@
             label1.Size = new Size(109, 20);
             label1.TabIndex = 14;
             label1.Text = "Kayıt Sayısı : 0";
-            label1.Click += label1_Click;
             // 
             // dateTimePicker3
             // 
@@ -193,34 +230,6 @@
             dateTimePicker4.Name = "dateTimePicker4";
             dateTimePicker4.Size = new Size(294, 27);
             dateTimePicker4.TabIndex = 16;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "ID";
-            Id.MinimumWidth = 6;
-            Id.Name = "Id";
-            Id.Width = 125;
-            // 
-            // Username
-            // 
-            Username.HeaderText = "Kullanıcı Adı";
-            Username.MinimumWidth = 6;
-            Username.Name = "Username";
-            Username.Width = 125;
-            // 
-            // Password
-            // 
-            Password.HeaderText = "Parola";
-            Password.MinimumWidth = 6;
-            Password.Name = "Password";
-            Password.Width = 125;
-            // 
-            // BirthDate
-            // 
-            BirthDate.HeaderText = "Doğum Günü";
-            BirthDate.MinimumWidth = 6;
-            BirthDate.Name = "BirthDate";
-            BirthDate.Width = 125;
             // 
             // UserForm
             // 
@@ -271,6 +280,7 @@
         private Label label1;
         private DateTimePicker dateTimePicker3;
         private DateTimePicker dateTimePicker4;
+        private DataGridViewCheckBoxColumn SelectBox;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Username;
         private DataGridViewTextBoxColumn Password;

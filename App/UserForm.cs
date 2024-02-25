@@ -9,6 +9,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace App
@@ -45,7 +46,15 @@ namespace App
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    dataGridView1.Rows.Add(reader["Id"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["BirthDate"].ToString());
+                    DataGridViewRow row = new DataGridViewRow();
+                    DataGridViewCheckBoxCell checkBoxCell = new DataGridViewCheckBoxCell();
+                    checkBoxCell.Value = false;
+                    row.Cells.Add(checkBoxCell);
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["Id"].ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["Username"].ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["Password"].ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["BirthDate"].ToString() });
+                    dataGridView1.Rows.Add(row);
                 }
                 Count = UserCount();
                 label1.Text = "Kayıt Sayısı :" + Count.ToString();
@@ -56,6 +65,7 @@ namespace App
                 MessageBox.Show("Hata: " + ex.Message);
             }
         }
+
         private void BtnList_Click(object sender, EventArgs e)
         {
             UserList();
@@ -181,7 +191,15 @@ namespace App
                 int Count = 0;
                 while (reader.Read())
                 {
-                    dataGridView1.Rows.Add(reader["Id"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["BirthDate"].ToString());
+                    DataGridViewRow row = new DataGridViewRow();
+                    DataGridViewCheckBoxCell checkBoxCell = new DataGridViewCheckBoxCell();
+                    checkBoxCell.Value = false;
+                    row.Cells.Add(checkBoxCell);
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["Id"].ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["Username"].ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["Password"].ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = reader["BirthDate"].ToString() });
+                    dataGridView1.Rows.Add(row);
                     Count++;
                 }
                 reader.Close();
@@ -225,12 +243,38 @@ namespace App
             {
                 connection.Close();
             }
-
             return count;
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Sadece checkbox sütununa tıklanıldığında işlem yap
+                if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn && e.RowIndex != -1)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                    // Checkbox'un durumunu kontrol et
+                    DataGridViewCheckBoxCell checkbox = dataGridView1[e.ColumnIndex, e.RowIndex] as DataGridViewCheckBoxCell;
+                    if (checkbox != null && checkbox.EditedFormattedValue != null && (bool)checkbox.EditedFormattedValue)
+                    {
+                        textBox4.Text = row.Cells[2].Value.ToString();
+                        textBox3.Text = row.Cells[1].Value.ToString();
+                        textBox5.Text = row.Cells[1].Value.ToString();
+                        textBox6.Text = row.Cells[3].Value.ToString();
+                        dateTimePicker4.Value = Convert.ToDateTime(row.Cells[4].Value);
+                    }
+                    else
+                    {
+                        textBox4.Clear();
+                        textBox5.Clear();
+                        textBox6.Clear();
+                        dateTimePicker4.Value = DateTime.Today;
+                    }
+                }
+            }
         }
+
+
     }
 }
