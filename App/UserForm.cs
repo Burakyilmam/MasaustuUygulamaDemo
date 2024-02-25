@@ -29,7 +29,7 @@ namespace App
             dateTimePicker2.MaxDate = DateTime.Today;
             Count = UserCount();
             label1.Text = "Kayıt Sayısı :" + Count.ToString();
-            MessageBox.Show("Hoşgeldin" + UserName);
+            MessageBox.Show("Hoşgeldin " + UserName);
             UserList();
         }
         public void UserList()
@@ -160,18 +160,19 @@ namespace App
         {
             string newUsername = textBox4.Text;
             string newPassword = textBox6.Text;
-            DateTime date = dateTimePicker4.Value;  
+            DateTime date = dateTimePicker4.Value;
             int Id = Int32.Parse(textBox5.Text);
-            UserUpdate(Id, newUsername, newPassword,date);
+            UserUpdate(Id, newUsername, newPassword, date);
         }
         public void TimeFilter()
         {
             dataGridView1.Rows.Clear();
             SqlConnection connection = new SqlConnection(ConnectionString);
-            string query = "SELECT * FROM [User] WHERE BirthDate BETWEEN @tarih1 AND @tarih2";
+            string query = "SELECT * FROM [User] WHERE BirthDate >= @tarih1 AND BirthDate <= @tarih2";
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@tarih1", dateTimePicker1.Value);
-            cmd.Parameters.AddWithValue("@tarih2", dateTimePicker2.Value);
+            DateTime tarih2 = dateTimePicker2.Value.Date.AddDays(1);
+            cmd.Parameters.AddWithValue("@tarih2", tarih2);
 
             try
             {
@@ -180,7 +181,7 @@ namespace App
                 int Count = 0;
                 while (reader.Read())
                 {
-                    dataGridView1.Rows.Add(reader["Id"].ToString(), reader["Username"].ToString(), reader["Password"].ToString());
+                    dataGridView1.Rows.Add(reader["Id"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["BirthDate"].ToString());
                     Count++;
                 }
                 reader.Close();
