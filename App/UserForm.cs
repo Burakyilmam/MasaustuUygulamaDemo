@@ -106,6 +106,7 @@ namespace App
             DateTime Date = dateTimePicker3.Value;
             string Id = textBox3.Text;
             UserAdd(username, password, Date);
+            UserList();
         }
         public void UserDelete()
         {
@@ -135,6 +136,7 @@ namespace App
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
             UserDelete();
+            UserList();
         }
         public void UserUpdate(int id, string newUsername, string newPassword, DateTime date)
         {
@@ -173,6 +175,7 @@ namespace App
             DateTime date = dateTimePicker4.Value;
             int Id = Int32.Parse(textBox5.Text);
             UserUpdate(Id, newUsername, newPassword, date);
+            UserList();
         }
         public void TimeFilter()
         {
