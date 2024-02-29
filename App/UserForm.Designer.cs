@@ -254,6 +254,7 @@
             Controls.Add(AddBtn);
             Controls.Add(BtnList);
             Name = "UserForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "UserForm";
             Load += UserForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
